@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ICustomers} from '@features/customers/model/ICustomers';
+
 import {ICustomersFilter} from '@features/customers/model/ICustomersFilter';
 
 @Component({

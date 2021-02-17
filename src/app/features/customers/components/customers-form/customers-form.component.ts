@@ -41,11 +41,11 @@ export class CustomersFormComponent implements OnInit {
   @Output('updateCustomers') updateCustomersEmitter = new EventEmitter();
 
   public isEditMode: boolean;
-  loading: boolean;
+ 
   customersRow : ICustomers;
   formDisabled: boolean;
 
-  constructor(private dialogService: NbDialogService, private cdr: ChangeDetectorRef, public acs : AccessCheckerService) { }
+  constructor(private dialogService: NbDialogService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() { }
 
