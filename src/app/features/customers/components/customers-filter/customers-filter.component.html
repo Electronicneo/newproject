@@ -1,0 +1,26 @@
+<form [formGroup]="customersFilterForm">
+  <div class="row align-items-end">
+
+    <div class="col-md-auto">
+      <label for="customersCode">
+        <span translate>customers.filter.customersCode</span>
+      </label>
+      <input type="text" nbInput fullWidth status="basic"  id="customersCode" shape="round" fieldSize="small"
+                             formControlName="customersCode">
+    </div>
+
+    <div class="col-md-auto mb-1">
+      <button  size="small" shape="round" outline nbButton status="primary" (click)="search()">
+        <nb-icon icon="search-outline"></nb-icon>
+      </button>
+    </div>
+
+    <div class="col-md-auto mb-1">
+      <button size="small" shape="round" outline nbButton status="warning" (click)="resetForm()"
+                  [nbTooltip]="'filter.buttons.resetButton' | translate">
+        <nb-icon icon="close-outline"> </nb-icon>
+      </button>
+    </div>
+  </div>
+</form>
+

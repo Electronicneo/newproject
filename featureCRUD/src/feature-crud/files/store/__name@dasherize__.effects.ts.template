@@ -1,0 +1,69 @@
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import {catchError, map, concatMap, switchMap, mergeMap} from 'rxjs/operators';
+import { of } from 'rxjs';
+import * as <%=classify(name)%>Actions from './<%=camelize(name)%>.actions';
+import {<%=classify(name)%>ApiService} from '@features/<%=camelize(name)%>/api/<%=name%>-api.service';
+import {defaultSuccessMessage, warningMessage} from 'shared';
+
+@Injectable()
+export class <%=classify(name)%>Effects {
+
+  constructor(private actions$: Actions, private <%=classify(name)%>Api: <%=classify(name)%>ApiService ) {}
+
+  load<%=classify(name)%>s = createEffect(() =>
+    this.actions$.pipe(
+      ofType(<%=classify(name)%>Actions.load<%=classify(name)%>s),
+      mergeMap(({filter}) => this.<%=classify(name)%>Api.getAll<%=classify(name)%>s(filter)
+        .pipe(
+          map(data => <%=classify(name)%>Actions.load<%=classify(name)%>sSuccess({<%=classify(name)%>s: data})),
+          catchError(error => of(<%=classify(name)%>Actions.load<%=classify(name)%>sFailure({error})))
+        ))
+    ));
+
+  add<%=classify(name)%>$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(<%=classify(name)%>Actions.add<%=classify(name)%>),
+      concatMap(({<%=classify(name)%>}) =>
+        this.<%=classify(name)%>Api.create<%=classify(name)%>(<%=classify(name)%>).pipe(
+          switchMap((<%=classify(name)%>Added: any) => [
+            <%=classify(name)%>Actions.add<%=classify(name)%>Success({ <%=classify(name)%>: <%=classify(name)%>Added }),
+            <%=classify(name)%>Actions.setSuccessState({success: true}),
+            defaultSuccessMessage()
+          ]),
+          catchError(error => of(warningMessage({message: error}))))
+        )
+      );
+  });
+
+  remove<%=classify(name)%>$ = createEffect (() => {
+    return this.actions$.pipe(
+      ofType(<%=classify(name)%>Actions.remove<%=classify(name)%>),
+      concatMap(({<%=classify(name)%>Code}) =>
+        this.<%=classify(name)%>Api.delete<%=classify(name)%>(<%=classify(name)%>Code).pipe(
+          switchMap(() => [
+            <%=classify(name)%>Actions.remove<%=classify(name)%>Success({<%=classify(name)%>Code: <%=classify(name)%>Code}),
+            defaultSuccessMessage(),
+            <%=classify(name)%>Actions.setSuccessState({success: true}),
+          ]),
+          catchError(error => of(warningMessage({message: error}))))
+      ));
+  });
+
+  update<%=classify(name)%>$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(<%=classify(name)%>Actions.update<%=classify(name)%>),
+      concatMap(({<%=classify(name)%>}) =>
+        this.<%=classify(name)%>Api.update<%=classify(name)%>(<%=classify(name)%>).pipe(
+          switchMap((<%=classify(name)%>Updated: any) => [
+            <%=classify(name)%>Actions.update<%=classify(name)%>Success({ <%=classify(name)%>: <%=classify(name)%>Updated }),
+            defaultSuccessMessage(),
+            <%=classify(name)%>Actions.setSuccessState({success: true}),
+          ]),
+          catchError(error => of(warningMessage({message: error}))))
+      )
+    );
+  });
+}
+
+

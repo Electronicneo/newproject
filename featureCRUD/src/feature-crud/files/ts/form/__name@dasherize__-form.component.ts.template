@@ -1,0 +1,81 @@
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component, ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {I<%=classify(name)%>} from '@features/<%=camelize(name)%>/model/I<%=classify(name)%>';
+import {NbDialogService} from '@nebular/theme';
+import {Observable} from 'rxjs';
+import { AccessCheckerService, DialogMessageComponent } from 'shared';
+
+@Component({
+  selector: '<%=prefix%>-<%=camelize(name)%>-form',
+  templateUrl: './<%=camelize(name)%>-form.component.html',
+  styleUrls: ['./<%=camelize(name)%>-form.component.scss']
+})
+export class <%=classify(name)%>FormComponent implements OnInit {
+
+  @ViewChild('labelImport', { static: false }) labelImport: ElementRef;
+  @Input('row')
+  set <%=camelize(name)%>(value: I<%=classify(name)%>) {
+    //value.id !== null ? this.isEditMode = true : this.isEditMode = false;
+     if(value.id !== null){
+          this.isEditMode = true;
+          this.formDisabled = true;
+        }else{
+          this.isEditMode = false;
+          this.formDisabled = false;
+        }
+    this.<%=camelize(name)%>Row = {...value};
+  }
+  @Output('closeEditForm') closeEditFormEmitter = new EventEmitter<Event>();
+  @Output('add<%=classify(name)%>') add<%=classify(name)%>Emitter = new EventEmitter();
+  @Output('remove<%=classify(name)%>') remove<%=classify(name)%>Emitter = new EventEmitter();
+  @Output('update<%=classify(name)%>') update<%=classify(name)%>Emitter = new EventEmitter();
+
+  public isEditMode: boolean;
+  loading: boolean;
+  <%=camelize(name)%>Row : I<%=classify(name)%>;
+  formDisabled: boolean;
+
+  constructor(private dialogService: NbDialogService, private cdr: ChangeDetectorRef, public acs : AccessCheckerService) { }
+
+  ngOnInit() { }
+
+  closeEditForm(event) {
+     this.closeEditFormEmitter.emit(event);
+  }
+
+  add<%=classify(name)%>(event) {
+    this.add<%=classify(name)%>Emitter.emit(this.<%=camelize(name)%>Row);
+  }
+
+  remove<%=classify(name)%>() {
+    this.dialogService.open(DialogMessageComponent, { context: { isConfirmationMode: true,
+                                                                 title: 'deleteConfirmationDialog.title',
+                                                                 message: 'deleteConfirmationDialog.message' }}).onClose.subscribe(isConfimrmed => {
+      if (isConfimrmed) {
+        this.remove<%=classify(name)%>Emitter.emit();
+      }
+    });
+  }
+
+  update<%=classify(name)%>() {
+    this.update<%=classify(name)%>Emitter.emit(this.<%=camelize(name)%>Row);
+  }
+
+  resetForm() {
+    //this.<%=camelize(name)%>Form.reset();
+  }
+
+  enableEditForm(event){
+    this.isEditMode = false;
+  }
+}

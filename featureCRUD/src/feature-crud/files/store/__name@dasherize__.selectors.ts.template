@@ -1,0 +1,26 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import * as from<%=classify(name)%> from './<%=camelize(name)%>.reducer';
+import {<%=classify(name)%>DefaultSelectors} from './<%=camelize(name)%>.reducer';
+
+export const select<%=classify(name)%>StateFeatureSelector = createFeatureSelector<from<%=classify(name)%>.State>(
+  from<%=classify(name)%>.<%=camelize(name)%>FeatureKey
+);
+
+export const select<%=classify(name)%>State = createSelector(select<%=classify(name)%>StateFeatureSelector, (state) =>
+  state.<%=classify(name)%>State);
+
+// select the array of Entitys
+export const selectAllEntities = createSelector(
+  select<%=classify(name)%>State,
+  <%=classify(name)%>DefaultSelectors.selectAll
+);
+
+// select success
+export const select<%=classify(name)%>SuccessState = createSelector(select<%=classify(name)%>StateFeatureSelector, (state) =>
+  state.<%=classify(name)%>State.success);
+
+
+// select isLOading
+export const select<%=classify(name)%>IsLoadingState = createSelector(select<%=classify(name)%>StateFeatureSelector, (state) =>
+    state.<%=classify(name)%>State.isLoading);
+

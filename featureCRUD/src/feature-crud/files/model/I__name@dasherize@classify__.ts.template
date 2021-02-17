@@ -1,0 +1,6 @@
+export interface I<%= classify(name)%> {
+    id: string;
+    <%= camelize(name)%>Code: string;
+    rootName: string;
+    lastUpdUser: string;
+}

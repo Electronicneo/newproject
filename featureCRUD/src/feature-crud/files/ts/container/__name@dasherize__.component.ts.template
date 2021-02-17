@@ -1,0 +1,122 @@
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {I<%=classify(name)%>Filter} from '@features/<%=camelize(name)%>/model/I<%=classify(name)%>Filter';
+import {<%=classify(name)%>FacadeService} from '@features/<%=camelize(name)%>/<%=classify(name)%>-facade.service';
+import {I<%=classify(name)%>} from '@features/<%=camelize(name)%>/model/I<%=camelize(name)%>';
+import {Observable, Subscription} from 'rxjs';
+import {NbDialogService, NbToastrService} from '@nebular/theme';
+import {TranslateService} from '@ngx-translate/core';
+import {DialogMessageComponent} from 'shared';
+
+@Component({
+  selector: '<%=prefix%>-<%=camelize(name)%>',
+  templateUrl: './<%=camelize(name)%>.component.html',
+  styleUrls: ['./<%=camelize(name)%>.component.scss']
+})
+export class <%=classify(name)%>Component implements OnInit, OnDestroy {
+  <%=camelize(name)%>Selected: I<%=classify(name)%>;
+  columns: {field: string, header: string, display: string, data: boolean, format: string} [];
+  layoutSingleColumn: boolean;
+  successState$ = this.<%=camelize(name)%>Facade.<%=camelize(name)%>SuccessState$;
+  isLoadingState$ = this.<%=camelize(name)%>Facade.<%=camelize(name)%>IsLoadingState$;
+  rootName;
+  lastUpdUser;
+
+  constructor(public <%=camelize(name)%>Facade: <%=classify(name)%>FacadeService ,
+              private toastrService: NbToastrService,
+              private translate: TranslateService,
+              private dialogService: NbDialogService) { }
+
+  ngOnInit() {
+    this.rootName = this.<%=camelize(name)%>Facade.acs.getRootName();
+    this.lastUpdUser = this.<%=camelize(name)%>Facade.acs.getUserName();
+    this.layoutSingleColumn = false;
+    const defaultFilter: I<%=classify(name)%>Filter = {rootName: this.rootName} ;
+
+    //uncomment that only when the load data API is developed!!!!
+    //this.<%=camelize(name)%>Facade.load<%=classify(name)%>(defaultFilter);
+
+    //dynamic column
+    this.columns = [{ field: 'col_1', header: this.translate.instant('<%=camelize(name)%>.list.<%=camelize(name)%>Code'), display: 'table-cell', data: false , format: '' },
+      { field: 'col_2', header: '<%=camelize(name)%>.list.<%=camelize(name)%>Col2', display: 'table-cell', data: false , format: '' },
+      { field: 'col_3', header: '<%=camelize(name)%>.list.<%=camelize(name)%>Col3', display: 'table-cell', data: false , format: '' },
+      { field: 'col_4', header: '<%=camelize(name)%>.list.<%=camelize(name)%>Col4', display: 'table-cell', data: false , format: '' }, //none
+    ];
+  }
+
+  ngOnDestroy(): void {
+    this.setSuccessState(true);
+   }
+
+  public setCurrent<%=classify(name)%>(event) {
+    // when the row is selected
+    this.<%=camelize(name)%>Selected = event;
+    //open form
+    this.setSuccessState(false);
+  }
+
+  public add<%=classify(name)%>(event){
+    this.<%=camelize(name)%>Selected = { id: null, <%=camelize(name)%>Code: null, rootName: null, lastUpdUser: null};
+    this.setSuccessState(false);
+  }
+
+  public changeLayout(event) {
+    this.layoutSingleColumn = !this.layoutSingleColumn;
+    if(this.layoutSingleColumn) {
+      this.columns.forEach((value, index) => index === 0 ? value.display='table-cell': value.display='none');
+    }else{
+      this.columns.forEach((value) => value.display='table-cell');
+    }
+  }
+
+  public closeFormCard(formDisabled) {
+     if (formDisabled) {
+          this.setSuccessState(true);
+     }else {
+              this.dialogService.open(DialogMessageComponent, {
+                      context: {isConfirmationMode: true, title: 'crudForm.dialogCloseForm.title', message: 'crudForm.dialogCloseForm.message'},
+                    }).onClose.subscribe(isConfirmed => {
+                                                      if (isConfirmed) {
+                                                      //closeForm
+                                                      this.setSuccessState(true);
+                                                      if(this.layoutSingleColumn){
+                                                          this.changeLayout(null);
+                                                        }
+                                                      }
+                                                    });
+            }
+      }
+
+
+  public remove<%=classify(name)%>(event) {
+    this.<%=camelize(name)%>Facade.remove<%=classify(name)%>(this.<%=camelize(name)%>Selected);
+  }
+
+  public save<%=classify(name)%>(<%=camelize(name)%>: I<%=classify(name)%>){
+    <%=camelize(name)%>.rootName = this.rootName;
+    <%=camelize(name)%>.lastUpdUser = this.lastUpdUser;
+    this.<%=camelize(name)%>Facade.save<%=classify(name)%>(<%=camelize(name)%>);
+  }
+
+  public update<%=classify(name)%>(<%=camelize(name)%>: I<%=classify(name)%>){
+    this.<%=camelize(name)%>Facade.update<%=classify(name)%>(<%=camelize(name)%>);
+  }
+
+  public search(filter){
+    filter.rootName = this.rootName;
+    this.<%=camelize(name)%>Facade.load<%=classify(name)%>(filter);
+  }
+
+   public setSuccessState(flag: boolean) {
+     this.<%=camelize(name)%>Facade.setSuccessState(flag);
+    }
+
+   public helpPage($event) {
+    this.dialogService.open(DialogMessageComponent, { context: { isConfirmationMode: false, title: this.translate.instant('<%=camelize(name)%>.help.pageTitle'), message: this.translate.instant('<%=camelize(name)%>.help.pageMessage') },
+     })
+   }
+
+   public helpTable($event) {
+     this.dialogService.open(DialogMessageComponent, { context: { isConfirmationMode: false, title: this.translate.instant('<%=camelize(name)%>.help.tableTitle'), message: this.translate.instant('<%=camelize(name)%>.help.tableMessage') },
+      })
+   }
+}

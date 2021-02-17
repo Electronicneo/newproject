@@ -1,0 +1,25 @@
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {I<%=classify(name)%>} from '@features/<%=camelize(name)%>/model/I<%=classify(name)%>';
+
+
+@Component({
+  selector: '<%=prefix%>-<%=camelize(name)%>-list',
+  templateUrl: './<%=camelize(name)%>-list.component.html',
+  styleUrls: ['./<%=camelize(name)%>-list.component.scss']
+})
+export class <%=classify(name)%>ListComponent implements OnInit {
+
+  @Input() <%=camelize(name)%>s$: Observable<I<%=classify(name)%>[]>;
+  @Input() cols: {field: string, header: string, display: string} [];
+  @Output('<%=camelize(name)%>Selected') <%=camelize(name)%>SelectedEmitter = new EventEmitter<I<%=classify(name)%>>();
+
+  constructor() { }
+
+  ngOnInit() { }
+
+  onRowSelect(event) {
+    this.<%=camelize(name)%>SelectedEmitter.emit(event.data);
+  }
+
+}

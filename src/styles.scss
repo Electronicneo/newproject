@@ -1,1 +1,58 @@
+@import 'themes';
+
+@import '~@nebular/theme/styles/globals';
+
+
+
+@include nb-install() {
+  @include nb-theme-global();
+};
+
+
+
+
+
+// loading progress bar theme
+
+
 /* You can add global styles to this file, and also import other style files */
+.formGeneralInfoHeader {
+  border-top: 2px solid;
+  border-top-color: var(--text-hint-color);
+}
+
+.password-fieldset{
+  border: 1px #0196ff solid;
+  border-radius: 25px;
+}
+
+#passwordLegend {
+  border: 1px #0196ff groove;
+  border-radius: 25px;
+  width: auto;
+  background-color: #0196ff;
+  color: white;
+  font-family: var(--font-family-sans-serif);
+  font-size: medium;
+  padding: 5px;
+}
+
+.crudTableList{
+  min-width: 1200px;
+}
+
+.crudNbCardTableList{
+  min-width: 600px;
+}
+
+.crud-card-header{
+  min-width: 1200px;
+}
+
+.crud-card-body{
+  min-width: 1200px;
+}
+
+.crud-card-header{
+  max-height: 3em;
+}

@@ -1,0 +1,26 @@
+    <p-table [columns]="cols"  [value]="customerss$ | async" selectionMode="single"
+             [styleClass]="'crudTableList'"
+             (onRowSelect)="onRowSelect($event)"
+             [paginator]="true" [rows]="10" class="rq-table"
+             [showCurrentPageReport]="true"
+             currentPageReportTemplate="{{'paginator.showing' | translate}} {first} {{'paginator.to' | translate}} {last} {{'paginator.of' | translate}} {totalRecords} {{'paginator.entries' | translate}}">
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of columns" style="width:250px">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let column of columns" pReorderableColumn [ngStyle]="{'display': column.display}" translate>
+            {{ column.header }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowCustomers let-columns="columns">
+        <tr [pSelectableRow]="rowCustomers">
+          <td *ngFor="let column of columns" [ngStyle]="{'display': column.display}">
+            {{ column.data ? (rowCustomers[column.field]| date : column.format) : rowCustomers[column.field] }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>

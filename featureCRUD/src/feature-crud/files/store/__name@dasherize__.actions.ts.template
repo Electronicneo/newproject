@@ -1,0 +1,74 @@
+import { createAction, props } from '@ngrx/store';
+import {I<%=classify(name)%>Filter} from '@features/<%=camelize(name)%>/model/I<%=classify(name)%>Filter';
+import {I<%=classify(name)%>} from '@features/<%=camelize(name)%>/model/I<%=classify(name)%>';
+
+
+// LOAD-<%=classify(name)%>
+export const load<%=classify(name)%>s = createAction(
+  '[<%=classify(name)%>] Load <%=classify(name)%>s',
+  props<{filter: I<%=classify(name)%>Filter}>()
+);
+
+export const load<%=classify(name)%>sSuccess = createAction(
+  '[<%=classify(name)%>] Load <%=classify(name)%>s Success',
+  props<{ <%=classify(name)%>s: I<%=classify(name)%>[] }>()
+);
+
+export const load<%=classify(name)%>sFailure = createAction(
+  '[<%=classify(name)%>] Load <%=classify(name)%>s Failure',
+  props<{ error: any }>()
+);
+
+// ADD-<%=classify(name)%>
+export const add<%=classify(name)%> = createAction(
+  '[<%=classify(name)%>] Add <%=classify(name)%>',
+  props<{<%=classify(name)%>: I<%=classify(name)%>}>()
+);
+
+export const add<%=classify(name)%>Success = createAction(
+  '[<%=classify(name)%>] Add <%=classify(name)%> Success',
+  props<{ <%=classify(name)%>: I<%=classify(name)%>}>()
+);
+
+export const add<%=classify(name)%>Failure = createAction(
+  '[<%=classify(name)%>] Add <%=classify(name)%> Failure',
+  props<{ errorMessage: string }>()
+);
+
+// REMOVE-<%=classify(name)%>
+export const remove<%=classify(name)%> = createAction(
+  '[<%=classify(name)%>] Remove <%=classify(name)%>',
+  props<{<%=classify(name)%>Code: string}>()
+);
+
+export const remove<%=classify(name)%>Success = createAction(
+  '[<%=classify(name)%>] Remove <%=classify(name)%> Success',
+  props<{<%=classify(name)%>Code: string}>()
+);
+
+export const remove<%=classify(name)%>Failure = createAction(
+  '[<%=classify(name)%>] Remove <%=classify(name)%> Failure',
+  props<{ error: any }>()
+);
+
+// UPDATE-<%=classify(name)%>
+export const update<%=classify(name)%> = createAction(
+  '[<%=classify(name)%>] Update <%=classify(name)%>',
+  props<{<%=classify(name)%>: I<%=classify(name)%>}>()
+);
+
+export const update<%=classify(name)%>Success = createAction(
+  '[<%=classify(name)%>] Update <%=classify(name)%> Success',
+  props<{<%=classify(name)%>: I<%=classify(name)%>}>()
+);
+
+export const update<%=classify(name)%>Failure = createAction(
+  '[<%=classify(name)%>] Update <%=classify(name)%> Failure',
+  props<{ error: any }>()
+);
+
+// SUCCESS
+export const setSuccessState = createAction(
+  '[<%=classify(name)%>] Set Success Status',
+  props<{ success: boolean }>()
+);

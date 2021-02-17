@@ -1,0 +1,51 @@
+import { Injectable } from '@angular/core';
+import {Store} from '@ngrx/store';
+import * as from<%=classify(name)%> from './store/<%=camelize(name)%>.reducer';
+import {I<%=classify(name)%>} from '@features/<%=classify(name)%>/model/I<%=classify(name)%>';
+import {selectAllEntities, select<%=classify(name)%>SuccessState, select<%=classify(name)%>IsLoadingState} from '@features/<%=camelize(name)%>/store/<%=camelize(name)%>.selectors';
+import {I<%=classify(name)%>Filter} from '@features/<%=classify(name)%>/model/I<%=classify(name)%>Filter';
+import {
+  add<%=classify(name)%>,
+  load<%=classify(name)%>s,
+  remove<%=classify(name)%>,
+  setSuccessState,
+  update<%=classify(name)%>
+} from '@features/<%=camelize(name)%>/store/<%=camelize(name)%>.actions';
+import {<%=classify(name)%>ApiService} from '@features/<%=name%>/api/<%=name%>-api.service';
+import {Observable} from 'rxjs';
+import {AccessCheckerService} from 'shared';
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class <%=classify(name)%>FacadeService {
+  <%=camelize(name)%>s$ = this.store.select(selectAllEntities);
+  <%=camelize(name)%>SuccessState$ = this.store.select(select<%=classify(name)%>SuccessState);
+  <%=camelize(name)%>IsLoadingState$ = this.store.select(select<%=classify(name)%>IsLoadingState);
+
+  constructor(private store: Store<from<%=classify(name)%>.State>,
+              private <%=camelize(name)%>API: <%=classify(name)%>ApiService,
+              public acs : AccessCheckerService) { }
+
+  public load<%=classify(name)%>(<%=camelize(name)%>Filter: I<%=classify(name)%>Filter){
+    this.store.dispatch(load<%=classify(name)%>s({filter: <%=camelize(name)%>Filter}));
+  }
+
+  public save<%=classify(name)%>(<%=camelize(name)%>: I<%=classify(name)%>){
+    this.store.dispatch(add<%=classify(name)%>({<%=classify(name)%>: <%=camelize(name)%>}));
+  }
+
+  public remove<%=classify(name)%>(<%=camelize(name)%>: I<%=classify(name)%>){
+    this.store.dispatch(remove<%=classify(name)%>({<%=classify(name)%>Code: <%=camelize(name)%>.<%=camelize(name)%>Code}));
+  }
+
+  public update<%=classify(name)%>(<%=camelize(name)%>: I<%=classify(name)%>){
+    this.store.dispatch(update<%=classify(name)%>({<%=classify(name)%>: <%=camelize(name)%>}));
+  }
+
+  public setSuccessState(flag: boolean) {
+    this.store.dispatch(setSuccessState({success: flag}))
+  }
+
+}

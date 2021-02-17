@@ -1,0 +1,79 @@
+import {initialState, reducer} from '../store/<%=camelize(name)%>.reducer';
+import * as <%=classify(name)%>Actions from './<%=camelize(name)%>.actions'
+import {setupChannel, setupStoreChannelEntity, setupStoreChannelList} from '@test-utils/setup-test-data';
+import {I<%=classify(name)%>} from '@features/<%=camelize(name)%>/model/I<%=classify(name)%>';
+
+describe('<%=classify(name)%> Reducer', () => {
+
+  const <%=name%>List = {} // todo create mock store @test-utils/setupStoreChannelList();
+  const <%=name%>ListStore =  {} // todo create mock store ex. @test-utils/setupStoreChannelEntity();
+  const new<%=classify(name)%>: I<%=classify(name)%> = {} // todo create mock @test-utils/setupChannel();
+
+  describe('Undefined action', () => {
+    it('should return default state', () => {
+      const action = { type: 'NOOP' } as any;
+      const result = reducer(undefined, action);
+      expect(result).toBe(initialState);
+    });
+  });
+
+  describe('[<%=classify(name)%>] Load <%=name%>s Success', () => {
+    it('should set <%=name%>s list', () => {
+      const action = <%=classify(name)%>Actions.load<%=classify(name)%>sSuccess({<%=name%>s: <%=name%>List});
+      const result = reducer(initialState, action);
+      const expectedValue = {} // todo create a mock expected value
+      expect(result).toEqual({"<%=name%>State": expectedValue});
+    })
+  });
+
+  describe('[<%=classify(name)%>] Add <%=classify(name)%> Success', () => {
+    it('should add new <%=name%>', () => {
+      const action = <%=classify(name)%>Actions.add<%=classify(name)%>Success({<%=name%>: new<%=classify(name)%>});
+      const result = reducer(initialState, action);
+      expect(result).toEqual({
+        channelState: {
+          ids: ['CH6A6MSG'], // todo insert mock id
+          entities: {CH6A6MSG: newChannel},
+          success: true
+        }
+      });
+    })
+  });
+
+  describe('[<%=classify(name)%>] Remove <%=classify(name)%> Success', () => {
+    it('should remove <%=name%>', () => {
+      const action = <%=classify(name)%>Actions.remove<%=classify(name)%>Success({<%=name%>Code: null}); // todo insert a mock code
+      const newState = {
+        channelState: {
+          ids: ['CH6A6MSG'], // todo insert a mock id
+          entities: {CH6A6MSG: new<%=classify(name)%>}, // todo insert a mock id
+          success: true
+        }
+      }
+      const result = reducer(newState, action);
+      expect(result).toEqual({channelState: { ids: [], entities: {}, success: true }} );
+    })
+  });
+
+  describe('[<%=classify(name)%>] Update <%=classify(name)%> Success', () => {
+    it('should update <%=name%>', () => {
+      const <%=name%>Updated: I<%=classify(name)%> = { } // todo insert here a mock <%=name%>Updated
+      const action = <%=classify(name)%>Actions.update<%=classify(name)%>Success({<%=name%>: <%=name%>Updated});
+      const newState = {
+        channelState: {
+          ids: ['CH6A6MSG'],
+          entities: {CH6A6MSG: new<%=classify(name)%>},
+          success: true
+        }
+      }
+      const result = reducer(newState, action);
+      expect(result).toEqual({
+        channelState: {
+          ids: ['CH6A6MSG'], // todo insert a mock id
+          entities: {CH6A6MSG: <%=name%>Updated}, //todo insert a mock id
+          success: true
+        }
+      } );
+    })
+  });
+});

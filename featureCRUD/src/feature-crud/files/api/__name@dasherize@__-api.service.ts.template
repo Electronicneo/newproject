@@ -1,0 +1,103 @@
+import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
+import {I<%=classify(name)%>Filter} from "../model/I<%=name%>Filter";
+import {I<%=classify(name)%>} from "../model/I<%=name%>";
+
+@Injectable({
+    providedIn: 'root'
+})
+
+export class <%=classify(name)%>ApiService {
+
+    constructor(private httpClient: HttpClient) { }
+
+    getAll<%=classify(name)%>s(filter: I<%=classify(name)%>Filter): Observable<I<%=classify(name)%>[]> {
+        const headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this.httpClient.post<I<%=classify(name)%>[]>(`TODO insert here url`, JSON.stringify(filter),{headers: headers}).pipe(
+        map((data: any) => {
+            let <%=camelize(name)%>List: I<%=classify(name)%>[] = [];
+            if(data && data.<%=camelize(name)%>AdapterList){
+                data.<%=camelize(name)%>AdapterList.forEach(data =>{
+                    <%=camelize(name)%>List.push({ id: data.<%=camelize(name)%>Code, <%=camelize(name)%>Code: data.<%=camelize(name)%>Code, rootName: data.rootName, lastUpdUser: data.lastUpdUser});
+                });
+            }
+            return <%=camelize(name)%>List;
+        }), catchError( error => {
+            return throwError( 'getAll<%=classify(name)%>s Something went wrong! '+ error);
+        })
+        );
+    }
+
+    create<%=classify(name)%>(<%=camelize(name)%>: I<%=classify(name)%>): Observable<I<%=classify(name)%>> {
+        const body = this.makeBody(<%=camelize(name)%>);
+        const headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this.httpClient.post<I<%=classify(name)%>>(`TODO insert here url`, JSON.stringify(body),{headers: headers}).pipe(
+        map((data: any) => {
+            let <%=camelize(name)%>: I<%=classify(name)%> = null;
+            if (data) {
+                if (data.infos && data.infos.length > 0) {
+                    let errorMessage: string= 'Create <%=name%> errors: ';
+                    errorMessage = errorMessage.concat(data.infos.map((errInfo) => `err: ${errInfo.message}, code: ${errInfo.codeLabel} `));
+                    throw new Error(errorMessage);
+                }
+                <%=camelize(name)%> = this.makeResponse(data);
+            }
+            return <%=camelize(name)%>;
+        }), catchError( error => {
+            return throwError( error );
+        })
+        );
+    }
+
+    delete<%=classify(name)%>(<%=camelize(name)%>Code: string): Observable<any> {
+        const headers = new HttpHeaders().set('Content-Type', 'application/json');
+        const body = { <%=camelize(name)%>Code: <%=camelize(name)%>Code };
+        return this.httpClient.post(`TODO insert here url` , JSON.stringify(body),{headers: headers}).pipe(
+            map((data: any) => {
+                if (data) {
+                    if (data.infos && data.infos.length > 0) {
+                        let errorMessage: string= 'Remove <%=camelize(name)%> errors: ';
+                        errorMessage = errorMessage.concat(data.infos.map((errInfo) => `err: ${errInfo.message}, code: ${errInfo.codeLabel} `));
+                        throw new Error(errorMessage);
+                    }
+                }
+            }), catchError( error => {
+                return throwError( error );
+            })
+        );
+    }
+
+    update<%=classify(name)%>(<%=camelize(name)%>: I<%=classify(name)%>): Observable<any> {
+        const body = this.makeBody(<%=camelize(name)%>);
+        const headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this.httpClient.post<I<%=classify(name)%>>(`TODO insert here url`, JSON.stringify(body),{headers: headers}).pipe(
+            map((data: any) => {
+                let <%=camelize(name)%>: I<%=classify(name)%> = null;
+                if (data) {
+                    if (data.infos && data.infos.length > 0) {
+                        let errorMessage: string= 'Update <%=name%> errors: ';
+                        errorMessage = errorMessage.concat(data.infos.map((errInfo) => `err: ${errInfo.message}, code: ${errInfo.codeLabel} `));
+                        throw new Error(errorMessage);
+                    }
+                <%=camelize(name)%> = this.makeResponse(data);
+            }
+            return <%=camelize(name)%>;
+        }), catchError( error => {
+            return throwError( error );
+        })
+        );
+    }
+
+
+    private makeBody(<%=camelize(name)%>: I<%=classify(name)%>): any {
+        return null;
+    }
+
+    private makeResponse(data: any): I<%=classify(name)%> {
+        return null;
+    }
+
+
+}

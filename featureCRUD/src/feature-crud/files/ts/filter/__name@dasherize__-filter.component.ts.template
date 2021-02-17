@@ -1,0 +1,42 @@
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {I<%=classify(name)%>} from '@features/<%=camelize(name)%>/model/I<%=classify(name)%>';
+import {I<%=classify(name)%>Filter} from '@features/<%=camelize(name)%>/model/I<%=classify(name)%>Filter';
+
+@Component({
+  selector: '<%=prefix%>-<%=camelize(name)%>-filter',
+  templateUrl: './<%=camelize(name)%>-filter.component.html',
+  styleUrls: ['./<%=camelize(name)%>-filter.component.scss']
+})
+export class <%=classify(name)%>FilterComponent implements OnInit {
+
+  @Output('search<%=classify(name)%>') search<%=classify(name)%>Emitter = new EventEmitter<I<%=classify(name)%>Filter>();
+
+  <%=camelize(name)%>FilterForm: FormGroup;
+  <%=camelize(name)%>CodeCtrl: FormControl;
+
+  constructor(protected fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.buildGeneralForm(this.fb);
+  }
+
+  buildGeneralForm(fb: FormBuilder) {
+    this.<%=camelize(name)%>CodeCtrl = fb.control( '', );
+    this.<%=camelize(name)%>FilterForm = fb.group({
+      <%=camelize(name)%>Code: this.<%=camelize(name)%>CodeCtrl,
+    });
+  }
+
+  public search(){
+    const <%=camelize(name)%>Code = this.<%=camelize(name)%>FilterForm.get('<%=camelize(name)%>Code').value;
+    const filter: I<%=classify(name)%>Filter = {<%=camelize(name)%>Code: `%${<%=camelize(name)%>Code}%`};
+    this.search<%=classify(name)%>Emitter.emit(filter);
+  }
+
+  public resetForm(){
+      this.<%=camelize(name)%>FilterForm.get('<%=camelize(name)%>Code').setValue('');
+  }
+}
+
+

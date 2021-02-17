@@ -1,0 +1,50 @@
+<as-split [disabled]="(successState$ | async)" unit="percent">
+  <as-split-area [size]="70" [minSize]="0">
+    <nb-card [nbSpinner]="isLoadingState$ | async" nbSpinnerSize="large" nbSpinnerStatus="primary" class="crudNbCardTableList">
+      <nb-card-header>
+        <shared-header-crud title="{{'customers.title' | translate}}"
+                            tooltipText="{{'customers.tooltips.addCustomers' | translate}}"
+                            addButtonText="{{'customers.addCustomers' | translate}}"
+                            (add)="addCustomers($event)"
+                            (helpPage)="helpPage($event)">
+        </shared-header-crud>
+      </nb-card-header>
+
+      <nb-card-body>
+         <!--filters component -->
+         <div class="d-flex justify-content-between flex-row align-items-center crud-card-body">
+          <div class="p-1">
+            <csm-customers-filter *ngIf="(successState$ | async)"
+              (searchCustomers)="search($event)">
+            </csm-customers-filter>
+          </div>
+           <!--dummy-->
+          <div class="p-1">
+            <span></span>
+          </div>
+         </div>
+
+         <!--list component-->
+         <div class="p-1 mt-3">
+          <csm-customers-list
+              [customerss$]="customersFacade.customerss$"
+              (customersSelected)="setCurrentCustomers($event)"
+              [cols]="columns">
+          </csm-customers-list>
+         </div>
+      </nb-card-body>
+    </nb-card>
+    </as-split-area>
+    <as-split-area [size]="30"  *ngIf="!(successState$ | async)">
+      <csm-customers-form
+        [row]="customersSelected"
+        (closeEditForm)="closeFormCard($event)"
+        (addCustomers)="saveCustomers($event)"
+        (removeCustomers)="removeCustomers($event)"
+        (updateCustomers)="updateCustomers($event)">
+      </csm-customers-form>
+    </as-split-area>
+</as-split>
+
+
+

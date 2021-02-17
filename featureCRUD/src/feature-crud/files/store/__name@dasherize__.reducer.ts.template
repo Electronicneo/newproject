@@ -1,0 +1,63 @@
+import { Action, createReducer, on } from '@ngrx/store';
+import * as <%=classify(name)%>Actions from './<%=camelize(name)%>.actions';
+import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
+import {I<%=classify(name)%>} from '@features/<%=camelize(name)%>/model/I<%=classify(name)%>';
+
+export const <%=camelize(name)%>FeatureKey = '<%=classify(name)%>';
+export const adapter<%=classify(name)%>: EntityAdapter<I<%=classify(name)%>> = createEntityAdapter<I<%=classify(name)%>>();
+export const initial<%=classify(name)%>State: I<%=classify(name)%>State = adapter<%=classify(name)%>.getInitialState({success: true, isLoading: false});
+
+export interface I<%=classify(name)%>State extends EntityState<I<%=classify(name)%>> {
+  success: boolean;
+  isLoading: boolean;
+}
+
+export interface State {
+  <%=classify(name)%>State: I<%=classify(name)%>State,
+}
+
+export const initialState: State = {
+  <%=classify(name)%>State: initial<%=classify(name)%>State,
+};
+
+const <%=classify(name)%>Reducer = createReducer(
+  initialState,
+  on(<%=classify(name)%>Actions.load<%=classify(name)%>sSuccess, (state, action) => {
+    let newState = {...state, <%=classify(name)%>State: adapter<%=classify(name)%>.removeAll(state.<%=classify(name)%>State)};
+    newState = {...newState, <%=classify(name)%>State: adapter<%=classify(name)%>.upsertMany(action.<%=classify(name)%>s, newState.<%=classify(name)%>State)};
+    newState.<%=classify(name)%>State.isLoading = false;
+    return newState;
+  }),
+  on(<%=classify(name)%>Actions.load<%=classify(name)%>s, (state, action) => {
+     const newState =  {... state};
+     newState.<%=classify(name)%>State.isLoading = true;
+     return newState;
+    }),
+
+  on(<%=classify(name)%>Actions.load<%=classify(name)%>sFailure, (state, action) => state),
+  on(<%=classify(name)%>Actions.add<%=classify(name)%>Success, (state, action) => {
+    return  {...state, <%=classify(name)%>State: adapter<%=classify(name)%>.upsertOne(action.<%=classify(name)%>, state.<%=classify(name)%>State) };
+    }),
+  on(<%=classify(name)%>Actions.remove<%=classify(name)%>Success, (state, action) =>
+    ({...state, <%=classify(name)%>State: adapter<%=classify(name)%>.removeOne(action.<%=classify(name)%>Code, state.<%=classify(name)%>State) })),
+  on(<%=classify(name)%>Actions.add<%=classify(name)%>Failure, (state, action) => state ),
+  on(<%=classify(name)%>Actions.update<%=classify(name)%>Success,(state, action) => {
+    return  {...state, <%=classify(name)%>State: adapter<%=classify(name)%>.upsertOne(action.<%=classify(name)%>, state.<%=classify(name)%>State) };
+  }),
+  on(<%=classify(name)%>Actions.setSuccessState, (state, action) => {
+    const newState = {...state};
+    newState.<%=classify(name)%>State.success = action.success;
+    return newState
+  })
+);
+
+export function reducer(state: State | undefined, action: Action) {
+  return <%=classify(name)%>Reducer(state, action);
+}
+
+export const <%=classify(name)%>DefaultSelectors: {
+  selectAll,
+  selectEntities,
+  selectIds,
+  selectTotal
+} = adapter<%=classify(name)%>.getSelectors();

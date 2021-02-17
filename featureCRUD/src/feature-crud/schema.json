@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "ProfilerCrudSchematics",
+  "title": "Crud Options Schema",
+  "type": "object",
+  "description": "Creates a new, CRUD feature in the given or default project.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the CRUD feature.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the CRUD feature?"
+    },
+    "helpPage": {
+      "type": "boolean",
+      "description": "Create a help page button? ",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "Create help page button?"
+    },
+    "helpTable": {
+      "type": "boolean",
+      "description": "Create table page button? ",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      },
+      "x-prompt": "Create a help table button?"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Insert component prefix",
+      "$default": {
+        "$source": "argv",
+        "index": 3
+      },
+      "x-prompt": "Insert component prefix"
+    },
+    "project": {
+      "type":"string",
+      "description": "Generate in specific Angular CLI workspace project"
+    },
+    "parentFeature": {
+      "type": "string",
+      "description": "If the creating feature is inside a main feature (default value is features)."
+    }
+  },
+  "required": ["name"]
+}
