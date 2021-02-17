@@ -6,16 +6,17 @@
 - 2 views : table mode and card mode
 - 1 detail 
 - 1 form for edit and add operations
-- Only table with primeNG the other thinks with Nebular(card, form , etc...)
-- You have to use our architecture (facade , Container/Presentational pattern , NGRX , NGRX store , etc...)
+- Only the table will be develop with primeNG the other thinks with Nebular(card, form , etc...)
+- You have to use our architecture (facade,Container/Presentational pattern,NGRX,NGRX store,etc...)
 - I suggest to install https://ngrx.io/guide/store-devtools 
 - I suggest to configure @ngrx/router-store https://ngrx.io/guide/router-store
+- I suggest to use 2 route 
 
 
 
 ## Install
 
-- run `git clone `  
+- run `git clone https://github.com/smartshapedSkills/owesome-customers.git `  
 - run  `npm i`
 - Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 - on `http://localhost:4200/customers` there is a customers feature

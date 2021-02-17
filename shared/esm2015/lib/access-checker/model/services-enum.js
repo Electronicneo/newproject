@@ -1,0 +1,10 @@
+export var ServicesEnum;
+(function (ServicesEnum) {
+    ServicesEnum["cancella_canali"] = "cancella canali";
+    ServicesEnum["modifica_canale"] = "modifica canale";
+    ServicesEnum["visualizza_canali"] = "visualizza canali";
+    ServicesEnum["crea_canale"] = "crea canale";
+    ServicesEnum["lista_risorse"] = "lista risorse";
+    ServicesEnum["visualizza_pagine"] = "cccb32b844ff11eb820d5048494f4e43";
+})(ServicesEnum || (ServicesEnum = {}));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2VydmljZXMtZW51bS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL3NoYXJlZC8iLCJzb3VyY2VzIjpbImxpYi9hY2Nlc3MtY2hlY2tlci9tb2RlbC9zZXJ2aWNlcy1lbnVtLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBTixJQUFZLFlBT1g7QUFQRCxXQUFZLFlBQVk7SUFDdEIsbURBQW1DLENBQUE7SUFDbkMsbURBQW1DLENBQUE7SUFDbkMsdURBQXVDLENBQUE7SUFDdkMsMkNBQTJCLENBQUE7SUFDM0IsK0NBQStCLENBQUE7SUFDL0Isc0VBQXNELENBQUE7QUFDeEQsQ0FBQyxFQVBXLFlBQVksS0FBWixZQUFZLFFBT3ZCIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGVudW0gU2VydmljZXNFbnVtIHtcclxuICBjYW5jZWxsYV9jYW5hbGkgPSAnY2FuY2VsbGEgY2FuYWxpJyxcclxuICBtb2RpZmljYV9jYW5hbGUgPSAnbW9kaWZpY2EgY2FuYWxlJyxcclxuICB2aXN1YWxpenphX2NhbmFsaSA9ICd2aXN1YWxpenphIGNhbmFsaScsXHJcbiAgY3JlYV9jYW5hbGUgPSAnY3JlYSBjYW5hbGUnLFxyXG4gIGxpc3RhX3Jpc29yc2UgPSAnbGlzdGEgcmlzb3JzZScsXHJcbiAgdmlzdWFsaXp6YV9wYWdpbmUgPSAnY2NjYjMyYjg0NGZmMTFlYjgyMGQ1MDQ4NDk0ZjRlNDMnXHJcbn1cclxuIl19
