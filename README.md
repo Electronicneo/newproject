@@ -14,8 +14,8 @@
 
 ## Install
 
-- run `git clone https://github.com/smartshapedSkills/owesome-customers.git `  
-- run  `npm i`
+- run `git clone https://github.com/smartshapedSkills/owesome-customers.git`  
+- run `npm i`
 - Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
-- on `http://localhost:4200/customers` there is the customers feature
+- on  `http://localhost:4200/customers` there is the customers feature
 
