@@ -1,0 +1,134 @@
+{
+  "customerss": [
+    {
+      "id": 1,
+      "name": "Ted James",
+      "address": "Seattle",
+      "streetNumber": "3002",
+      "city": "Phoenix",
+      "country": "Arizona"
+    },
+    {
+      "id": 2,
+      "name": "Michelle Thomson",
+      "address": "Seattle",
+      "streetNumber": "3002",
+      "city": "Encinitias",
+      "country": "California"
+    },
+    {
+      "id": 3,
+      "name": "Zed Bishop",
+      "address": "Seattle",
+      "streetNumber": "3002",
+      "city": "Seattle",
+      "country": "Washington"
+    },
+    {
+      "id": 4,
+      "name": "Tina Adams",
+      "address": "Seattle",
+      "streetNumber": "3002",
+      "city": "Chandler",
+      "country": "Arizona"
+    },
+    {
+      "id": 5,
+      "name": "Igor Minar",
+      "address": "Seattle",
+      "streetNumber": "3002",
+      "city": "Dallas",
+      "country": "Texas"
+    },
+    {
+      "id": 6,
+      "name": "Brand Green",
+      "address": "Seattle",
+      "streetNumber": "3002",
+      "city": "Orlando",
+      "country": "Florida"
+    },
+    {
+      "id": 7,
+      "name": "Misko Hevery",
+      "address": "Seattle",
+      "streetNumber": "3002",
+      "city": "Carey,North",
+      "country": "Carolina"
+    },
+    {
+      "id": 8,
+      "name": "Heedy Wahlin",
+      "address": "Seattle",
+      "streetNumber": "3002",
+      "city": "Anaheim",
+      "country": "California"
+    },
+    {
+      "id": 9,
+      "name": "John Papa",
+      "address": "Seattle",
+      "streetNumber": "3002",
+      "city": "Orlando",
+      "country": "Florida"
+    },
+    {
+      "id": 10,
+      "name": "Tonya Smith",
+      "address": "Seattle",
+      "streetNumber": "3002",
+      "city": "Atlanta",
+      "country": "Georgia"
+    },
+    {
+      "id": 11,
+      "name": "Tonya Smith",
+      "address": "Seattle",
+      "streetNumber": "3002",
+      "city": "Atlanta",
+      "country": "Georgia"
+    },
+    {
+      "name": "2851 Islan",
+      "address": "gg",
+      "streetNumber": "gg",
+      "city": "Philadelph",
+      "country": "gg",
+      "id": 12
+    },
+    {
+      "id": 13,
+      "name": "ss",
+      "address": "ss",
+      "streetNumber": "ss",
+      "city": "ss",
+      "country": "South Suda"
+    },
+    {
+      "id": 14,
+      "name": "weee",
+      "address": "ss",
+      "streetNumber": "ss",
+      "city": "ss",
+      "country": "South Suda"
+    },
+    {
+      "id": 15,
+      "name": "2851 Islan",
+      "address": "huu",
+      "streetNumber": "hhh",
+      "city": "Philadelph",
+      "country": "hhh"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

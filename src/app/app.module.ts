@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbCardModule, NbSpinnerModule, NbMenuModule, NbToastrModule, NbSidebarModule } from '@nebular/theme';
+import { NbThemeModule,NbRouteTabsetModule,NbTabsetModule,NbLayoutModule, NbCardModule, NbSpinnerModule, NbMenuModule, NbToastrModule, NbSidebarModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AngularSplitModule } from 'angular-split';
@@ -15,6 +15,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NbDialogModule } from '@nebular/theme';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -22,7 +25,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     NbSidebarModule.forRoot(),
     TranslateModule.forRoot(),
     HttpClientModule,
+    NbTabsetModule,
+    NbCardModule,
+    NbRouteTabsetModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -48,9 +54,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       router: routerReducer,
     }),
     EffectsModule.forRoot(),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {
   constructor(private translate: TranslateService) {

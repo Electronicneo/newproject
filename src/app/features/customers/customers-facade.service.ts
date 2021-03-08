@@ -26,7 +26,7 @@ export class CustomersFacadeService {
 
   constructor(private store: Store<fromCustomers.ICustomersState>,
               private customersAPI: CustomersApiService,
-              public acs : AccessCheckerService) { }
+             ) { }
 
   public loadCustomers(customersFilter: ICustomersFilter){
     this.store.dispatch(loadCustomerss({filter: customersFilter}));
@@ -37,7 +37,7 @@ export class CustomersFacadeService {
   }
 
   public removeCustomers(customers: ICustomers){
-    this.store.dispatch(removeCustomers({CustomersCode: customers.customersCode}));
+    this.store.dispatch(removeCustomers({CustomersId: customers.id}));
   }
 
   public updateCustomers(customers: ICustomers){

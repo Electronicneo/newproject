@@ -2,7 +2,8 @@
   <as-split-area [size]="70" [minSize]="0">
     <nb-card [nbSpinner]="isLoadingState$ | async" nbSpinnerSize="large" nbSpinnerStatus="primary" class="crudNbCardTableList">
       <nb-card-header>
-        <shared-header-crud title="{{'customers.title' | translate}}"
+        
+        <shared-header-crud *ngIf="viewTable" title="{{'customers.title' | translate}}"
                             tooltipText="{{'customers.tooltips.addCustomers' | translate}}"
                             addButtonText="{{'customers.addCustomers' | translate}}"
                             (add)="addCustomers($event)"
@@ -11,31 +12,38 @@
       </nb-card-header>
 
       <nb-card-body>
-         <!--filters component -->
+        <!-- <nb-route-tabset [tabs]="tabs" ></nb-route-tabset>  -->
+        <button (click)="viewTablee()" nbButton>View Table</button>
+        <button (click)="viewCardss()" nbButton>View Card</button>
+        
          <div class="d-flex justify-content-between flex-row align-items-center crud-card-body">
           <div class="p-1">
             <csm-customers-filter *ngIf="(successState$ | async)"
               (searchCustomers)="search($event)">
             </csm-customers-filter>
           </div>
-           <!--dummy-->
+          
           <div class="p-1">
             <span></span>
           </div>
          </div>
-
-         <!--list component-->
+         
          <div class="p-1 mt-3">
-          <csm-customers-list
+          <csm-customers-list *ngIf="viewTable"
               [customerss$]="customersFacade.customerss$"
               (customersSelected)="setCurrentCustomers($event)"
               [cols]="columns">
           </csm-customers-list>
+          <app-card-view [customerss$]="customersFacade.customerss$" *ngIf="viewCard"></app-card-view>
+          
          </div>
+         <app-card-form 
+         (addCustomers)="saveCustomers($event)"
+         ></app-card-form> 
       </nb-card-body>
     </nb-card>
     </as-split-area>
-    <as-split-area [size]="30"  *ngIf="!(successState$ | async)">
+    <as-split-area [size]="30"  *ngIf="!(successState$ | async)" >
       <csm-customers-form
         [row]="customersSelected"
         (closeEditForm)="closeFormCard($event)"

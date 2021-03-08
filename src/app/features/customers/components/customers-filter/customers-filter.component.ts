@@ -22,20 +22,20 @@ export class CustomersFilterComponent implements OnInit {
   }
 
   buildGeneralForm(fb: FormBuilder) {
-    this.customersCodeCtrl = fb.control( '', );
+   // this.customersCodeCtrl = fb.control( 'name, );
     this.customersFilterForm = fb.group({
-      customersCode: this.customersCodeCtrl,
+      name: this.customersCodeCtrl,
     });
   }
 
   public search(){
-    const customersCode = this.customersFilterForm.get('customersCode').value;
-    const filter: ICustomersFilter = {customersCode: `%${customersCode}%`};
+    const customersCode = this.customersFilterForm.get('name').value;
+    const filter: ICustomersFilter = {name: customersCode};
     this.searchCustomersEmitter.emit(filter);
   }
 
   public resetForm(){
-      this.customersFilterForm.get('customersCode').setValue('');
+      this.customersFilterForm.get('name').setValue('');
   }
 }
 

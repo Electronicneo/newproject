@@ -21,5 +21,8 @@ export class CustomersListComponent implements OnInit {
   onRowSelect(event) {
     this.customersSelectedEmitter.emit(event.data);
   }
+  ngOnChanges(changes: any) {
+    //console.log(changes.customers);
+}
 
 }

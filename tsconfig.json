@@ -27,5 +27,7 @@
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-  }
+  },
+  "types": ["jest"],
+  "typeRoots": ["./src/types", "node_modules/@types"],
 }

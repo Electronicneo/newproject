@@ -39,10 +39,10 @@ export class CustomersEffects {
   removeCustomers$ = createEffect (() => {
     return this.actions$.pipe(
       ofType(CustomersActions.removeCustomers),
-      concatMap(({CustomersCode}) =>
-        this.CustomersApi.deleteCustomers(CustomersCode).pipe(
+      concatMap(({CustomersId}) =>
+        this.CustomersApi.deleteCustomers(CustomersId).pipe(
           switchMap(() => [
-            CustomersActions.removeCustomersSuccess({CustomersCode: CustomersCode}),
+            CustomersActions.removeCustomersSuccess({CustomersCode: CustomersId}),
             defaultSuccessMessage(),
             CustomersActions.setSuccessState({success: true}),
           ]),

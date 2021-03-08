@@ -1,6 +1,8 @@
 export interface ICustomers {
     id: string;
-    customersCode: string;
-    rootName: string;
-    lastUpdUser: string;
+    name: string;
+    address: string;
+    streetNumber: string;
+    city: string;
+    country: string;
 }

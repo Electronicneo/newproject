@@ -1,0 +1,30 @@
+<div class="container" >
+    <div class="row">
+          
+          <!-- /.col-lg-3 col-md-4 -->
+        
+          
+          <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let customer of customerss$ | async">
+            <!-- <div class="panel panel-default userlist">
+                <div class="panel-header"> <a href="" class="btn btn-link"><img src="/assets/Pictures/edit-users.png" alt="" class="edit-icon"></a></div>
+              <div class="panel-body text-center">
+                <div class="userprofile">
+                  <div class="userpic"> <img src="/assets/Pictures/users.png" alt="" class="userpicimg"> </div>
+                  <h3 class="username">{{customer.name}}</h3>
+                  <p>New York, USA</p>
+                </div>
+            <div class="panel-footer"> <a href="" class="btn btn-link">View Orders</a></div>
+            </div>
+          </div> -->
+          <nb-card>
+            <nb-card-header> <a class="edittt" (click)="open()" target="_blank"><nb-icon  icon="edit-2-outline"></nb-icon></a> </nb-card-header>
+            <nb-card-header class="gty"><nb-icon class="icons" icon="person-outline"></nb-icon></nb-card-header>
+            <nb-card-header class="gty">{{customer.name}}</nb-card-header>
+            <nb-card-body class="gty">
+            {{customer.city}},
+            {{customer.country}}
+            </nb-card-body>
+            <nb-card-footer class="gty"> <a  href="https://www.w3schools.com" target="_blank">View Orders</a></nb-card-footer>
+          </nb-card>
+        </div>
+        </div>

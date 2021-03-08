@@ -38,7 +38,7 @@ export const addCustomersFailure = createAction(
 // REMOVE-Customers
 export const removeCustomers = createAction(
   '[Customers] Remove Customers',
-  props<{CustomersCode: string}>()
+  props<{CustomersId: string}>()
 );
 
 export const removeCustomersSuccess = createAction(

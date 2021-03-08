@@ -11,17 +11,19 @@ import * as fromCustomers from './store/customers.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CustomersEffects } from './store/customers.effects';
 import { AngularSplitModule } from 'angular-split';
-import { NbAccordionComponent, NbAccordionModule, NbCardModule, NbIconModule, NbInputModule, NbSpinnerModule, NbTooltipModule } from '@nebular/theme';
+import { NbAccordionComponent, NbAccordionModule, NbCardModule, NbIconModule, NbInputModule, NbRouteTabsetModule, NbSpinnerModule, NbTabsetModule, NbTooltipModule } from '@nebular/theme';
 import { TableModule } from 'primeng/table';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NbButtonModule } from '@nebular/theme';
+import { CardViewComponent } from './components/card-view/card-view.component';
+import { CardFormComponent } from './components/card-form/card-form.component';
 
 
 
 @NgModule({
-  declarations: [CustomersComponent, CustomersFormComponent, CustomersFilterComponent, CustomersListComponent],
+  declarations: [CustomersComponent, CustomersFormComponent, CustomersFilterComponent, CustomersListComponent, CardViewComponent, CardFormComponent],
   imports: [
     sharedLibModule,CommonModule,
     CustomersRoutingModule,
@@ -32,6 +34,8 @@ import { NbButtonModule } from '@nebular/theme';
     NbCardModule,
     NbSpinnerModule,
     TableModule,
+    NbTabsetModule,
+    NbRouteTabsetModule,
     TranslateModule, 
     NbAccordionModule,
     ReactiveFormsModule,

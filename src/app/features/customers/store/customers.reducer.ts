@@ -16,9 +16,13 @@ const CustomersReducer = createReducer(
   initialCustomersState,
   on(CustomersActions.loadCustomerssSuccess, (customerState, action) => {
     let newState =  adapterCustomers.removeAll(customerState);
-    newState = adapterCustomers.upsertMany(action.Customerss, customerState);
+    customerState = adapterCustomers.upsertMany(action.Customerss, newState);
     newState = {...customerState , isLoading : false }  
-    return newState;
+   return newState;
+  //  let newState = {...customerState, customerState: adapterCustomers.removeAll(customerState) };     
+  //  newState = {...newState, customerState: adapterCustomers.upsertMany(action.Customerss, customerState) };    
+  // newState = {...newState , isLoading : false };
+ //  return newState;
   }),
   on(CustomersActions.loadCustomerss, (state, action) => (
       {... state , isLoading : true}

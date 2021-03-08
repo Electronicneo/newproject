@@ -6,6 +6,10 @@ import {Observable, Subscription} from 'rxjs';
 import {NbDialogService, NbToastrService} from '@nebular/theme';
 import {TranslateService} from '@ngx-translate/core';
 import {DialogMessageComponent} from 'shared';
+import { CardViewComponent } from '../components/card-view/card-view.component';
+import { CustomersListComponent } from '../components/customers-list/customers-list.component';
+import { CustomersFormComponent } from '../components/customers-form/customers-form.component';
+import { CardFormComponent } from '../components/card-form/card-form.component';
 
 @Component({
   selector: 'csm-customers',
@@ -18,31 +22,56 @@ export class CustomersComponent implements OnInit, OnDestroy {
   layoutSingleColumn: boolean;
   successState$ = this.customersFacade.customersSuccessState$;
   isLoadingState$ = this.customersFacade.customersIsLoadingState$;
-  rootName;
+  name;
   lastUpdUser;
-
+  viewCard:boolean=false;
+  viewTable:boolean=true;
   constructor(public customersFacade: CustomersFacadeService ,
               private toastrService: NbToastrService,
               private translate: TranslateService,
               private dialogService: NbDialogService) { }
 
   ngOnInit() {
-    this.rootName = this.customersFacade.acs.getRootName();
-    this.lastUpdUser = this.customersFacade.acs.getUserName();
     this.layoutSingleColumn = false;
-    const defaultFilter: ICustomersFilter = {rootName: this.rootName} ;
+    const defaultFilter: ICustomersFilter = {name: ""} ;
 
     //uncomment that only when the load data API is developed!!!!
-    //this.customersFacade.loadCustomers(defaultFilter);
+    this.customersFacade.loadCustomers(defaultFilter);
 
     //dynamic column
-    this.columns = [{ field: 'col_1', header: this.translate.instant('customers.list.customersCode'), display: 'table-cell', data: false , format: '' },
-      { field: 'col_2', header: 'customers.list.customersCol2', display: 'table-cell', data: false , format: '' },
-      { field: 'col_3', header: 'customers.list.customersCol3', display: 'table-cell', data: false , format: '' },
-      { field: 'col_4', header: 'customers.list.customersCol4', display: 'table-cell', data: false , format: '' }, //none
+    this.columns = [{ field: 'name', header: this.translate.instant('Name'), display: 'table-cell', data: false , format: '' },
+      { field: 'address', header: 'Address', display: 'table-cell', data: false , format: '' },
+      { field: 'streetNumber', header: 'Street Number', display: 'table-cell', data: false , format: '' },
+      { field: 'city', header: 'City', display: 'table-cell', data: false , format: '' },
+      { field: 'country', header: 'Country', display: 'table-cell', data: false , format: '' }, //none
     ];
   }
+   public viewCardss(){
+    this.viewCard=true;
+    this.viewTable=false;
+  }
+  public viewTablee(){
+    this.viewCard=false;
+    this.viewTable=true;
+  }
+  open() {
+    this.dialogService.open(CardFormComponent)
+      // .onClose.subscribe(name => name && this.names.push(name));
+  }
+  tabs: any[] = [
+    {
+      title: 'Users',
+      icon: 'person',
+      route: './',
+    },
+    {
+      title: 'Card View',
+      icon: 'paper-plane-outline',
+      responsive: true,
+      route: [ './card' ],
+    },
 
+  ];
   ngOnDestroy(): void {
     this.setSuccessState(true);
    }
@@ -55,7 +84,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
   }
 
   public addCustomers(event){
-    this.customersSelected = { id: null, customersCode: null, rootName: null, lastUpdUser: null};
+    this.customersSelected = { id: null, name: null, address: null, streetNumber: null ,city:null , country:null};
     this.setSuccessState(false);
   }
 
@@ -92,8 +121,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
   }
 
   public saveCustomers(customers: ICustomers){
-    customers.rootName = this.rootName;
-    customers.lastUpdUser = this.lastUpdUser;
+  
     this.customersFacade.saveCustomers(customers);
   }
 
@@ -102,7 +130,6 @@ export class CustomersComponent implements OnInit, OnDestroy {
   }
 
   public search(filter){
-    filter.rootName = this.rootName;
     this.customersFacade.loadCustomers(filter);
   }
 
