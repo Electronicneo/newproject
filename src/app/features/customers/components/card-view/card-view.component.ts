@@ -25,6 +25,8 @@ export class CardViewComponent implements OnInit {
   }
   open() {
     this.dialogService.open(CardFormComponent)
+
+    
       // .onClose.subscribe(name => name && this.names.push(name));
   }
 }
