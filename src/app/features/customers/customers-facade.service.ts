@@ -41,7 +41,9 @@ export class CustomersFacadeService {
   }
 
   public updateCustomers(customers: ICustomers){
+    console.log("hello")
     this.store.dispatch(updateCustomers({Customers: customers}));
+    
   }
 
   public setSuccessState(flag: boolean) {

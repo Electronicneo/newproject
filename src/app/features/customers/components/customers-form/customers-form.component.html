@@ -34,6 +34,7 @@
                    <div class="row">
                      <div class="col-sm-6">
                       <div class="form-group">
+<<<<<<< HEAD
                        <!-- <label for="name" class="label">
                          <span translate>customers.form.name</span>
                            <nb-icon class="rq-question-tooltip" icon="question-mark-circle-outline"
@@ -44,6 +45,8 @@
                          <input type="text" nbInput fullWidth id="city" shape="round" [(ngModel)]="customersRow.city" [disabled]="isEditMode"
                               required maxlength="10" name="city" #city="ngModel"
                               [status]="city.errors?.required ? 'danger':'basic'"> -->
+=======
+>>>>>>> 0b96ca8 (all project)
                               <label for="name" class="label">
                                 <span translate>Name</span>
                                   <nb-icon class="rq-question-tooltip" icon="question-mark-circle-outline"
@@ -52,7 +55,12 @@
                                   </nb-icon>
                                 </label>
                          <input type="text" nbInput fullWidth id="name" shape="round" [(ngModel)]="customersRow.name" [disabled]="isEditMode"
+<<<<<<< HEAD
                               required maxlength="10" name="name" #name="ngModel"
+=======
+                                required
+                                 name="name" #name="ngModel"
+>>>>>>> 0b96ca8 (all project)
                               [status]="name.errors?.required ? 'danger':'basic'">
 
                               <label for="address" class="label">
@@ -63,7 +71,11 @@
                                   </nb-icon>
                                 </label>
                         <input type="text" nbInput fullWidth id="address" shape="round" [(ngModel)]="customersRow.address" [disabled]="isEditMode"
+<<<<<<< HEAD
                               required maxlength="10" name="address" #address="ngModel"
+=======
+                              required  name="address" #address="ngModel"
+>>>>>>> 0b96ca8 (all project)
                               [status]="address.errors?.required ? 'danger':'basic'">
 
                               <label for="name" class="label">
@@ -74,6 +86,7 @@
                                   </nb-icon>
                                 </label>
                         <input type="text" nbInput fullWidth id="streetNumber" shape="round" [(ngModel)]="customersRow.streetNumber" [disabled]="isEditMode"
+<<<<<<< HEAD
                               required maxlength="10" name="streetNumber" #streetNumber="ngModel"
                               [status]="streetNumber.errors?.required ? 'danger':'basic'">
                               <label for="streetNumber" class="label">
@@ -98,6 +111,34 @@
                         <input type="text" nbInput fullWidth id="country" shape="round" [(ngModel)]="customersRow.country" [disabled]="isEditMode"
                               required maxlength="10" name="country" #country="ngModel"
                               [status]="country.errors?.required ? 'danger':'basic'">
+=======
+                              required  name="streetNumber" #streetNumber="ngModel"
+                              [status]="streetNumber.errors?.required ? 'danger':'basic'">
+
+                       <label for="streetNumber" class="label">
+
+                               <span translate>City</span>
+                                 <nb-icon class="rq-question-tooltip" icon="question-mark-circle-outline"
+                                        [nbTooltip]="'customers.questions.city' | translate"
+                                        nbTooltipPlacement="top" nbTooltipStatus="info">
+                                 </nb-icon>
+                               </label>
+                       <input type="text" nbInput fullWidth id="city" shape="round" [(ngModel)]="customersRow.city" [disabled]="isEditMode"
+                             required  name="city" #city="ngModel"
+                             [status]="city.errors?.required ? 'danger':'basic'">
+
+                             <label for="name" class="label">
+                               <span translate>Country</span>
+                                 <nb-icon class="rq-question-tooltip" icon="question-mark-circle-outline"
+                                        [nbTooltip]="'customers.questions.country' | translate"
+                                        nbTooltipPlacement="top" nbTooltipStatus="info">
+                                 </nb-icon>
+                               </label>
+                       <input type="text" nbInput fullWidth id="country" shape="round" [(ngModel)]="customersRow.country" [disabled]="isEditMode"
+                             required  name="country" #country="ngModel"
+                             [status]="country.errors?.required ? 'danger':'basic'">
+
+>>>>>>> 0b96ca8 (all project)
                       </div>
                   </div>
                 </div>

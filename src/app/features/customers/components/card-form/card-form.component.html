@@ -1,69 +1,78 @@
-<form #customersForm="ngForm" (ngSubmit)="addCustomers(customersRow)">
-<nb-card [size]="'medium'" >
+<div >
+<form [formGroup]="cardForm"  >
+  <nb-card [size]="'medium'" >
     <nb-card-body class="example-items-col">
-        <div class="container">
-            <fieldset>
-               <div class="row">
-                 <div class="col-sm-6">
-                  <div class="form-group">
-        <label for="name" class="label">
-            <span translate>Name</span>
-              <nb-icon class="rq-question-tooltip" icon="question-mark-circle-outline"
-                     [nbTooltip]="'customers.questions.name' | translate"
-                     nbTooltipPlacement="top" nbTooltipStatus="info">
-              </nb-icon>
-            </label>
-       <input type="text" nbInput fullWidth shape="semi-round" id="name" placeholder="Name" name="name" #name="ngModel" (ngModel)="customersRow.name" >
+      <div class="container">
+        <fieldset>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <!-- <input  type="hidden" nbInput fullWidth shape="semi-round" id="id" name="id"
+                  formControlName="id" > -->
+                <label for="name" class="label">
+                  <span translate>Name</span>
+                  <nb-icon class="rq-question-tooltip" icon="question-mark-circle-outline"
+                    [nbTooltip]="'customers.questions.name' | translate" nbTooltipPlacement="top"
+                    nbTooltipStatus="info">
+                  </nb-icon>
+                </label>
+                <input  type="text" nbInput fullWidth shape="semi-round" id="name" placeholder="Name" name="name"
+                  formControlName="name" required>
 
 
-       <label for="address" class="label">
-        <span translate>Address</span>
-          <nb-icon class="rq-question-tooltip" icon="question-mark-circle-outline"
-                 [nbTooltip]="'customers.questions.address' | translate"
-                 nbTooltipPlacement="top" nbTooltipStatus="info">
-          </nb-icon>
-        </label>
-   <input type="text" nbInput fullWidth shape="semi-round" placeholder="address" (ngModel)="customersRow.address" >
+                <label for="address" class="label">
+                  <span translate>Address</span>
+                  <nb-icon class="rq-question-tooltip" icon="question-mark-circle-outline"
+                    [nbTooltip]="'customers.questions.address' | translate" nbTooltipPlacement="top"
+                    nbTooltipStatus="info">
+                  </nb-icon>
+                </label>
+                <input  type="text" nbInput fullWidth shape="semi-round" placeholder="address"
+                formControlName="address" required>
 
 
-   <label for="streetNumber" class="label">
-    <span translate>Street Number</span>
-      <nb-icon class="rq-question-tooltip" icon="question-mark-circle-outline"
-             [nbTooltip]="'customers.questions.streetNumber' | translate"
-             nbTooltipPlacement="top" nbTooltipStatus="info">
-      </nb-icon>
-    </label>
-<input type="text" nbInput fullWidth shape="semi-round" placeholder="Street Number" (ngModel)="customersRow.streetNumber" >
+                <label for="streetNumber" class="label">
+                  <span translate>Street Number</span>
+                  <nb-icon class="rq-question-tooltip" icon="question-mark-circle-outline"
+                    [nbTooltip]="'customers.questions.streetNumber' | translate" nbTooltipPlacement="top"
+                    nbTooltipStatus="info">
+                  </nb-icon>
+                </label>
+                <input type="text" nbInput fullWidth shape="semi-round" placeholder="Street Number"
+                formControlName="streetNumber" required>
 
 
-<label for="city" class="label">
-    <span translate>City</span>
-      <nb-icon class="rq-question-tooltip" icon="question-mark-circle-outline"
-             [nbTooltip]="'customers.questions.city' | translate"
-             nbTooltipPlacement="top" nbTooltipStatus="info">
-      </nb-icon>
-    </label>
-<input type="text" nbInput fullWidth shape="semi-round" placeholder="City" (ngModel)="customersRow.city" >
+                <label for="city" class="label">
+                  <span translate>City</span>
+                  <nb-icon class="rq-question-tooltip" icon="question-mark-circle-outline"
+                    [nbTooltip]="'customers.questions.city' | translate" nbTooltipPlacement="top"
+                    nbTooltipStatus="info">
+                  </nb-icon>
+                </label>
+                <input type="text" nbInput fullWidth shape="semi-round" placeholder="City"
+                formControlName="city" required>
 
 
-<label for="country" class="label">
-    <span translate>Country</span>
-      <nb-icon class="rq-question-tooltip" icon="question-mark-circle-outline"
-             [nbTooltip]="'customers.questions.country' | translate"
-             nbTooltipPlacement="top" nbTooltipStatus="info">
-      </nb-icon>
-    </label>
-<input type="text" nbInput fullWidth shape="semi-round" placeholder="Country" (ngModel)="customersRow.country">
-  <div class="p-1">
-    <button  status="success" nbButton (ngSubmit)="addCustomers($event)">Save</button>
-    <i></i>
-     <button  status="danger" nbButton (click)="close()">Close</button>
-  </div>
-</div>
-</div>
-</div>
-</fieldset>
-</div>
-      </nb-card-body>
+                <label for="country" class="label">
+                  <span translate>Country</span>
+                  <nb-icon class="rq-question-tooltip" icon="question-mark-circle-outline"
+                    [nbTooltip]="'customers.questions.country' | translate" nbTooltipPlacement="top"
+                    nbTooltipStatus="info">
+                  </nb-icon>
+                </label>
+                <input  type="text" nbInput fullWidth shape="semi-round" placeholder="Country"
+                formControlName="country" required>
+                <div class="d-flex p-2">
+                  <button class="mr-1"  type="submit" (click)="addCustomers()" status="success" nbButton >Save</button>
+                  <button class="mr-1" *ngIf="isUpdate" type="submit" (click)="updateCustomers($event)" status="success" nbButton >Update</button>
+                  <button class="mr-1" status="danger" (click)="resetForm()" nbButton>Reset Form</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </nb-card-body>
   </nb-card>
 </form>
+</div>

@@ -1,10 +1,10 @@
 <div class="container" >
-    <div class="row">
+    <div class="row" >
           
           <!-- /.col-lg-3 col-md-4 -->
         
           
-          <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let customer of customerss$ | async">
+          <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let customer of customerss$ | async" (onRowSelect)="onRowSelect($event)">
             <!-- <div class="panel panel-default userlist">
                 <div class="panel-header"> <a href="" class="btn btn-link"><img src="/assets/Pictures/edit-users.png" alt="" class="edit-icon"></a></div>
               <div class="panel-body text-center">
@@ -17,9 +17,14 @@
             </div>
           </div> -->
           <nb-card>
-            <nb-card-header> <a class="edittt" (click)="open()" target="_blank"><nb-icon  icon="edit-2-outline"></nb-icon></a> </nb-card-header>
-            <nb-card-header class="gty"><nb-icon class="icons" icon="person-outline"></nb-icon></nb-card-header>
-            <nb-card-header class="gty">{{customer.name}}</nb-card-header>
+            <nb-card-header>
+               <a class="edittt" (click)="customersSel(customer)" target="_blank"><nb-icon  icon="edit-2-outline"></nb-icon></a> 
+               <a class="delete" (click)="removeCustomers(customer)" target="_blank"><nb-icon  icon="trash-2-outline"></nb-icon></a>
+            </nb-card-header>
+            <br>
+            <div class="gty"><nb-icon class="icons" icon="person-outline"></nb-icon></div>
+            <br>
+            <div class="gty">{{customer.name}}</div>
             <nb-card-body class="gty">
             {{customer.city}},
             {{customer.country}}

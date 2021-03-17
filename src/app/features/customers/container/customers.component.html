@@ -1,58 +1,114 @@
-<as-split [disabled]="(successState$ | async)" unit="percent">
-  <as-split-area [size]="70" [minSize]="0">
-    <nb-card [nbSpinner]="isLoadingState$ | async" nbSpinnerSize="large" nbSpinnerStatus="primary" class="crudNbCardTableList">
-      <nb-card-header>
-        
-        <shared-header-crud *ngIf="viewTable" title="{{'customers.title' | translate}}"
-                            tooltipText="{{'customers.tooltips.addCustomers' | translate}}"
-                            addButtonText="{{'customers.addCustomers' | translate}}"
-                            (add)="addCustomers($event)"
-                            (helpPage)="helpPage($event)">
-        </shared-header-crud>
-      </nb-card-header>
+<div class="mb-2">
+  <button (click)="viewTablee()" nbButton status="primary">View Table</button>
+  <button (click)="viewCardss()" nbButton status="warning">View Card</button>
+</div>
 
-      <nb-card-body>
-        <!-- <nb-route-tabset [tabs]="tabs" ></nb-route-tabset>  -->
-        <button (click)="viewTablee()" nbButton>View Table</button>
-        <button (click)="viewCardss()" nbButton>View Card</button>
-        
-         <div class="d-flex justify-content-between flex-row align-items-center crud-card-body">
-          <div class="p-1">
-            <csm-customers-filter *ngIf="(successState$ | async)"
-              (searchCustomers)="search($event)">
-            </csm-customers-filter>
+
+<ng-container *ngIf="cardservice.viewTable">
+  <as-split [disabled]="(successState$ | async)" unit="percent">
+    <as-split-area [size]="70" [minSize]="0">
+      <nb-card [nbSpinner]="isLoadingState$ | async" nbSpinnerSize="large" nbSpinnerStatus="primary"
+        class="crudNbCardTableList">
+        <nb-card-header>
+
+          <shared-header-crud *ngIf="cardservice.viewTable" title="{{'customers.title' | translate}}"
+            tooltipText="{{'customers.tooltips.addCustomers' | translate}}"
+            addButtonText="{{'customers.addCustomers' | translate}}" (add)="addCustomers()"
+            (helpPage)="helpPage($event)">
+          </shared-header-crud>
+        </nb-card-header>
+
+        <nb-card-body>
+
+
+          <div class="d-flex justify-content-between flex-row align-items-center crud-card-body">
+            <div class="p-1">
+              <csm-customers-filter *ngIf="(successState$ | async)" (searchCustomers)="search($event)">
+              </csm-customers-filter>
+            </div>
+
+            <div class="p-1">
+              <span></span>
+            </div>
           </div>
-          
-          <div class="p-1">
-            <span></span>
+
+          <div class="p-1 mt-3">
+            <csm-customers-list *ngIf="cardservice.viewTable" [customerss$]="customersFacade.customerss$"
+              (customersSelected)="setCurrentCustomers($event)" [cols]="columns">
+            </csm-customers-list>
+
+
           </div>
-         </div>
-         
-         <div class="p-1 mt-3">
-          <csm-customers-list *ngIf="viewTable"
-              [customerss$]="customersFacade.customerss$"
-              (customersSelected)="setCurrentCustomers($event)"
-              [cols]="columns">
-          </csm-customers-list>
-          <app-card-view [customerss$]="customersFacade.customerss$" *ngIf="viewCard"></app-card-view>
-          
-         </div>
-         <app-card-form 
-         (addCustomers)="saveCustomers($event)"
-         ></app-card-form> 
-      </nb-card-body>
-    </nb-card>
+
+        </nb-card-body>
+      </nb-card>
     </as-split-area>
-    <as-split-area [size]="30"  *ngIf="!(successState$ | async)" >
-      <csm-customers-form
-        [row]="customersSelected"
-        (closeEditForm)="closeFormCard($event)"
-        (addCustomers)="saveCustomers($event)"
-        (removeCustomers)="removeCustomers($event)"
+    <as-split-area [size]="30" *ngIf="!(successState$ | async)">
+      <csm-customers-form [row]="customersSelected" (closeEditForm)="closeFormCard($event)"
+        (addCustomers)="saveCustomers($event)" (removeCustomers)="removeCustomers($event)"
         (updateCustomers)="updateCustomers($event)">
       </csm-customers-form>
     </as-split-area>
-</as-split>
+  </as-split>
+</ng-container>
+<ng-container *ngIf="cardservice.formCard">
+  <nb-card>
+    <nb-card-header>
+    <h1> Add Costumers</h1>
+    </nb-card-header>
+    
+    <nb-card-body>
+      <app-card-form  [customer]="customersSelected" (updateCustomers)="updateCustomers($event)" (addCustomers)="saveCustomers($event)" ></app-card-form>
+    </nb-card-body>
+
+  </nb-card>
+
+</ng-container>
+<ng-container *ngIf="cardservice.viewCard">
+  <nb-card>
+    <nb-card-header>
+      <!-- <button (click)="addCustomers()" nbButton status="primary">Add</button> -->
+      <button (click)="cardform()" nbButton status="primary">Add</button>
+    </nb-card-header>
+    <nb-card-body>
+     
+      <app-card-view    [customerss$]="customersFacade.customerss$" (customersSel)="setCurrentCustomers($event)"  (removeCustomer)="removeCustomerss($event)" ></app-card-view>
+      
+      <!-- <div *ngIf="(successState$ | async)" class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let customer of customersFacade.customerss$ | async">
+          <nb-card>
+            <nb-card-header>
+              <div class="d-flex justify-content-between">
+                <div>
+                  {{customer.name}}
+                </div>
+                <div>
+                  <a (click)="setCurrentCustomers(customer)" target="_blank"><nb-icon  icon="edit-2-outline"></nb-icon></a>
+                </div>
+              </div>
+            </nb-card-header>
+
+            <nb-card-body>
+              {{customer.city}},
+              {{customer.country}}
+            </nb-card-body>
+
+          </nb-card>
+        </div>
+      </div>
+      <div *ngIf="!(successState$ | async)" class="row">
+        <csm-customers-form
+          [row]="customersSelected"
+          (closeEditForm)="closeFormCard($event)"
+          (addCustomers)="saveCustomers($event)"
+          (removeCustomers)="removeCustomers($event)"
+          (updateCustomers)="updateCustomers($event)">
+        </csm-customers-form>
+      </div> -->
+
+    </nb-card-body>
+  </nb-card>
 
 
+</ng-container>
 
