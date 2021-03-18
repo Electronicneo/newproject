@@ -37,19 +37,10 @@ export class CustomersApiService {
         );
     }
 
-    private mockData(): Observable<ICustomers[]> {
-      let customerA: ICustomers = {id: '001', address: 'adressA', city: 'cityA', country: 'countryA', name: 'nameA', streetNumber:'streetNumberA'};
-      let customerB: ICustomers = {id: '002', address: 'adressB', city: 'cityB', country: 'countryB', name: 'nameB', streetNumber:'streetNumberB'};
-      let customerC: ICustomers = {id: '003', address: 'adressC', city: 'cityC', country: 'countryC', name: 'nameC', streetNumber:'streetNumberC'};
-
-      let list : ICustomers[] = [];
-      list = [...list, customerA, customerB, customerC ];
-      return of(list);
-    }
 
     createCustomers(customers: ICustomers): Observable<ICustomers> {
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
-        if(customers.id){
+        if(customers.id=='' || customers.id==null){
         return this.httpClient.post<ICustomers>(this.endPoint,customers).pipe(
         map((data: any) => {
                  return customers;

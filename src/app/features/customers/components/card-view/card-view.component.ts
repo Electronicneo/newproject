@@ -14,29 +14,26 @@ import { CardViewService } from 'src/app/card-view.service';
 })
 export class CardViewComponent implements OnInit {
   
-  customersRow: ICustomers;
+
   @Input() customerss$: Observable<ICustomers[]>;
-  @Input() cols: { field: string, header: string, display: string }[];
   @Output('customersSel') customersSelEmitter = new EventEmitter<ICustomers>();
   @Output('removeCustomer') removeCustomersEmitter = new EventEmitter();
-  @Output('customersSelected') customersSelectedEmitter = new EventEmitter<ICustomers>();
+
   constructor(private dialogService: NbDialogService,
     private cardservice: CardViewService) { }
-   
-  ngOnInit(): void {
-    // this.customerss$.subscribe(customers=>console.log(customers))
-    console.log(this.customerss$);
-  }
 
-  onRowSelect(event) {
-    this.customersSelectedEmitter.emit(event.data);
+  public isEditMode: boolean;
+  ngOnInit(): void {
     
   }
+
+ 
   customersSel(customers: ICustomers){
     this.cardservice.formCard = true;
     this.cardservice.viewCard =false;
     this.cardservice.viewTable=false;
     this.customersSelEmitter.emit(customers);
+    //this.isEditMode=true;
    //this.cardservice.sendClickEvent(customers);
   }
 
